@@ -20,16 +20,22 @@ export function LoadGraph() {
             const graph = new MultiDirectedGraph();
             const nodes = response.data.nodes;
             const edges = response.data.edges;
-            for (var edge of edges) {
-                const src = nodes[edge[0]];
-                const dst = nodes[edge[1]];
-                if (!graph.hasNode(src.id)) {
-                    graph.addNode(src.id, {x: 0, y: 0, size: node_size, label: `${src.title} by ${src.artist_name}`, color: node_color});
+            if (edges.length > 0) {
+                for (var edge of edges) {
+                    const src = nodes[edge[0]];
+                    const dst = nodes[edge[1]];
+                    if (!graph.hasNode(src.id)) {
+                        graph.addNode(src.id, {x: 0, y: 0, size: node_size, label: `${src.title} by ${src.artist_name}`, color: node_color});
+                    }
+                    if (!graph.hasNode(dst.id)) {
+                        graph.addNode(dst.id, {x: 0, y: 0, size: node_size, label: `${dst.title} by ${dst.artist_name}`, color: node_color});
+                    }
+                    graph.addDirectedEdge(src.id, dst.id, {label: edge[2]});
                 }
-                if (!graph.hasNode(dst.id)) {
-                    graph.addNode(dst.id, {x: 0, y: 0, size: node_size, label: `${dst.title} by ${dst.artist_name}`, color: node_color});
+            } else {
+                for (var node of nodes) {
+                    graph.addNode(node.id, {x: 0, y: 0, size: node_size, label: `${node.title} by ${node.artist_name}`, color: node_color});
                 }
-                graph.addDirectedEdge(src.id, dst.id, {label: edge[2]});
             }
             loadGraph(graph);
             assign();
