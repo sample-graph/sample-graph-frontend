@@ -1,5 +1,7 @@
 # SampleGraph
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/29f0c51c-6262-4525-a91a-3a09ff62ac08/deploy-status?branch=main)](https://app.netlify.com/sites/samplegraph/deploys?branch=main)
+
 This React project provides a frontend for SampleGraph: a web application for visualizing relationships between musical samples.
 
 ## Key Dependencies
