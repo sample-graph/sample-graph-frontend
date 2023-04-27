@@ -1,6 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { Container, Content, Section } from 'react-bulma-components';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import { AppHeader } from './Header';
 import { AppFooter } from './Footer';
@@ -11,6 +13,7 @@ import { DisplayGraph } from './Graph';
 function AppBase(core) {
   return (
     <div className="App">
+      <ToastContainer position="top-right"/>
       <AppHeader/>
         <Section>
           <Container>

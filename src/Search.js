@@ -4,6 +4,7 @@ import { Form } from "react-bulma-components";
 import { debounce } from "lodash";
 
 import { Results } from "./Results";
+import { toast } from "react-toastify";
 
 const random_titles = ["In My Feelings by Drake", "Truth Hurts by Lizzo", "3005 by Childish Gambino"];
 
@@ -31,6 +32,9 @@ export function Search() {
                                 axios.get(`${endpoint}?q=${e.target.value}`)
                                 .then((response) => {
                                     setResults(response.data);
+                                })
+                                .catch((err) => {
+                                    toast.error(`Failed to get search results: ${err.message}`, {toastId: "search-err"});
                                 })
                             }, 300
                         )}

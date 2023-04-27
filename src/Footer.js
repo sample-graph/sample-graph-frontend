@@ -1,6 +1,7 @@
 import axios from "axios";
 import React from "react";
 import { Footer } from "react-bulma-components";
+import { toast } from "react-toastify";
 
 export function AppFooter() {
     const endpoint = `${process.env.REACT_APP_API_URL}/version`;
@@ -9,7 +10,8 @@ export function AppFooter() {
     React.useEffect(() => {
         axios.get(endpoint).then((response) => {
             setVersion(response.data);
-        }).catch((_) => {
+        }).catch((err) => {
+            toast.error(`Failed to get API version: ${err.message}`, {toastId: "version-err"})
             setVersion("???");
         });
     }, [endpoint]);

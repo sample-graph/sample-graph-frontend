@@ -6,6 +6,7 @@ import { SigmaContainer, useLoadGraph } from "@react-sigma/core";
 import { useLayoutCircular } from "@react-sigma/layout-circular";
 import "@react-sigma/core/lib/react-sigma.min.css";
 import { Block } from "react-bulma-components";
+import { toast } from "react-toastify";
 
 export function LoadGraph() {
     const { id } = useParams();
@@ -39,6 +40,9 @@ export function LoadGraph() {
             }
             loadGraph(graph);
             assign();
+        })
+        .catch((err) => {
+            toast.error(`Failed to get graph: ${err.message}`, {toastId: "graph-err"});
         });
     }, [endpoint, loadGraph, positions, assign, node_color, node_size]);
 
