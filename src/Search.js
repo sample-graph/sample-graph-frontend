@@ -1,10 +1,10 @@
-import axios from "axios";
 import React from "react";
 import { Form } from "react-bulma-components";
 import { debounce } from "lodash";
 
 import { Results } from "./Results";
 import { toast } from "react-toastify";
+import { getResource } from "./utils";
 
 const random_titles = ["In My Feelings by Drake", "Truth Hurts by Lizzo", "3005 by Childish Gambino"];
 
@@ -14,9 +14,12 @@ function random(titles) {
 }
 
 export function Search() {
-    const endpoint = `${process.env.REACT_APP_API_URL}/search`;
     const [placeholder, setPlaceholder] = React.useState(null);
     const [results, setResults] = React.useState(null);
+    const response_handler = (response) => setResults(response.data);
+    const error_handler = (err) => {
+        toast.error(`Failed to get search results: ${err.message}`, {toastId: "search-err"});
+    };
 
     React.useEffect(() => setPlaceholder(random(random_titles)), []);
 
@@ -27,17 +30,7 @@ export function Search() {
                     <Form.Label>Search for a song...</Form.Label>
                     <Form.Input
                         placeholder={placeholder + "?"}
-                        onChange={debounce(
-                            (e) => {
-                                axios.get(`${endpoint}?q=${e.target.value}`)
-                                .then((response) => {
-                                    setResults(response.data);
-                                })
-                                .catch((err) => {
-                                    toast.error(`Failed to get search results: ${err.message}`, {toastId: "search-err"});
-                                })
-                            }, 300
-                        )}
+                        onChange={debounce((e) => getResource(`search?q=${e.target.value}`, response_handler, error_handler), 300)}
                     />
                 </Form.Field>
             </form>
