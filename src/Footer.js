@@ -6,15 +6,15 @@ import { getResource } from "./utils";
 
 export function AppFooter() {
     const [version, setVersion] = React.useState(null);
-    const response_handler = (response) => setVersion(response.data);
-    const error_handler = (err) => {
-        toast.error(`Failed to get API version: ${err.message}`, {toastId: "version-err"});
-        setVersion("?");
-    };
 
     React.useEffect(() => {
+        const response_handler = (response) => setVersion(response.data);
+        const error_handler = (err) => {
+            toast.error(`Failed to get API version: ${err.message}`, {toastId: "version-err"});
+            setVersion("?");
+        };
         getResource("version", response_handler, error_handler);
-    }, [response_handler, error_handler]);
+    }, []);
 
     return (
         <Footer textAlign="center" backgroundColor="white">
