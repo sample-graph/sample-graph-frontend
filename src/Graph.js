@@ -46,7 +46,9 @@ export function LoadGraph(props) {
                     if (!graph.hasNode(dst.song.id)) {
                         addNode(graph, props.id, dst, node_size);
                     }
-                    graph.addDirectedEdge(src.song.id, dst.song.id, {label: deSnakeCase(edge[2]), size: edge_size});
+                    if (!graph.hasEdge(src.song.id, dst.song.id)) {
+                        graph.addDirectedEdge(src.song.id, dst.song.id, {label: deSnakeCase(edge[2]), size: edge_size});
+                    }
                 }
             } else {
                 for (var node of nodes) {
