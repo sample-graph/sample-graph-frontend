@@ -11,9 +11,13 @@ import "@react-sigma/core/lib/react-sigma.min.css";
 
 import { getResource } from "./utils";
 
-function addNode(graph, node, node_size, node_color) {
+function addNode(graph, center, node, node_size) {
     const label = `${node.song.title} by ${node.song.artist_name}`;
-    graph.addNode(node.song.id, {x: 0, y: 0, size: node_size, color: node_color, degree: node.degree, label: label});
+    var settings = {x: 0, y: 0, size: node_size, degree: node.degree, label: label};
+    if (center == node.song.id) {
+        settings["color"] = "red";
+    }
+    graph.addNode(node.song.id, settings);
 }
 
 function deSnakeCase(str) {
@@ -24,7 +28,6 @@ export function LoadGraph(props) {
     const { id } = useParams();
     const loadGraph = useLoadGraph();
     const { positions, assign } = useLayoutForceAtlas2();
-    const node_color = "#000000";
     const node_size = 6;
     const edge_size = 3;
 
@@ -38,16 +41,16 @@ export function LoadGraph(props) {
                     const src = nodes[edge[0]];
                     const dst = nodes[edge[1]];
                     if (!graph.hasNode(src.song.id)) {
-                        addNode(graph, src, node_size, node_color);
+                        addNode(graph, props.id, src, node_size);
                     }
                     if (!graph.hasNode(dst.song.id)) {
-                        addNode(graph, dst, node_size, node_color);
+                        addNode(graph, props.id, dst, node_size);
                     }
                     graph.addDirectedEdge(src.song.id, dst.song.id, {label: deSnakeCase(edge[2]), size: edge_size});
                 }
             } else {
                 for (var node of nodes) {
-                    addNode(graph, node, node_size, node_color);
+                    addNode(graph, props.id, node, node_size);
                 }
             }
             loadGraph(graph);
@@ -60,14 +63,15 @@ export function LoadGraph(props) {
             toast.error(`Failed to get graph: ${err.message}`, {toastId: "graph-err"});
             props.setLoading(false);
         };
-        getResource(`graph/${id}`, response_handler, error_handler);
-    }, [id, loadGraph, positions, assign, node_color, node_size, edge_size, props]);
+        getResource(`graph/${props.id}`, response_handler, error_handler);
+    }, [id, loadGraph, positions, assign, node_size, edge_size, props]);
 
     return null;
 }
 
 export function DisplayGraph() {
     const [loading, setLoading] = React.useState(true);
+    const { id } = useParams();
     return (
         <Message>
             <Message.Header radiusless={true}>
@@ -80,6 +84,7 @@ export function DisplayGraph() {
                 <SigmaContainer 
                     style={{display: loading ? "none" : "flex"}} 
                     settings={{
+                        defaultNodeColor: "black",
                         defaultEdgeType: "arrow", 
                         labelFont: "IBM Plex Mono, monospace", 
                         renderEdgeLabels: true, 
@@ -87,7 +92,7 @@ export function DisplayGraph() {
                         edgeLabelColor: "black",
                     }}
                 >
-                    <LoadGraph setLoading={setLoading}/>
+                    <LoadGraph setLoading={setLoading} id={id}/>
                     <ControlsContainer>
                         <SearchControl/>
                         <ZoomControl/>
