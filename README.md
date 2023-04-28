@@ -6,13 +6,14 @@ This React project provides a frontend for SampleGraph: a web application for vi
 
 ## Key Dependencies
 
-* `react-sigma` - React components for Sigma.js (graph visualization)
+* `react-sigma` - components for Sigma.js (graph visualization)
 * `graphology` - core data model for graphs
-* `react-bulma-components` - React components for Bulma CSS framework
+* `react-bulma-components` - components for Bulma CSS framework
 * `lodash.debounce` - debouncing for text boxes
-* `react-dom` - some simple React routing
+* `react-dom` - some simple routing
 * `axios` - HTTP requests to reach the backend API
-* `react-toastify` - React elements for pop-up notifications
+* `react-toastify` - elements for pop-up notifications
+* `react-spinners ` - elements for loading spinners
 
 ## Necessary Environemnt Variables
 

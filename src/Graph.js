@@ -1,15 +1,16 @@
 import React from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import MultiDirectedGraph from "graphology";
-import { SigmaContainer, useLoadGraph } from "@react-sigma/core";
+import { SigmaContainer, useLoadGraph, ControlsContainer, ZoomControl, SearchControl, FullScreenControl } from "@react-sigma/core";
 import { useLayoutCircular } from "@react-sigma/layout-circular";
-import { Block } from "react-bulma-components";
+import { Message } from "react-bulma-components";
 import { toast } from "react-toastify";
+import { ScaleLoader } from "react-spinners";
 import "@react-sigma/core/lib/react-sigma.min.css";
 
 import { getResource } from "./utils";
 
-export function LoadGraph() {
+export function LoadGraph(props) {
     const { id } = useParams();
     const loadGraph = useLoadGraph();
     const { positions, assign } = useLayoutCircular();
@@ -40,23 +41,38 @@ export function LoadGraph() {
             }
             loadGraph(graph);
             assign();
+            props.setLoading(false);
         };
         const error_handler = (err) => {
             toast.error(`Failed to get graph: ${err.message}`, {toastId: "graph-err"});
+            props.setLoading(false);
         };
         getResource(`graph/${id}`, response_handler, error_handler);
-    }, [id, loadGraph, positions, assign, node_color, node_size]);
+    }, [id, loadGraph, positions, assign, node_color, node_size, props]);
 
     return null;
 }
 
 export function DisplayGraph() {
+    const [loading, setLoading] = React.useState(true);
     return (
-        <Block alignContent="center" alignItems="center">
-            <Link to="/">&larr; Return Home</Link>
-            <SigmaContainer style={{ height: "65vh", width: "100%", border: "1px solid black" }}>
-                <LoadGraph />
-            </SigmaContainer>
-        </Block>
+        <Message>
+            <Message.Header radiusless={true}>
+                <a href="/">&larr; Return Home</a>
+            </Message.Header>
+            <Message.Body style={{height: "70vh"}} paddingless={true} radiusless={true} backgroundColor="white">
+                <div style={{ height: "100%", width: "100%", display: loading ? "flex" : "none", alignContent: "center", alignItems: "center"}}>
+                    <ScaleLoader radius={0} loading={loading} speedMultiplier={0.75} style={{margin: "auto"}}/>
+                </div>
+                <SigmaContainer style={{display: loading ? "none" : "flex"}}>
+                    <LoadGraph setLoading={setLoading}/>
+                    <ControlsContainer>
+                        <SearchControl/>
+                        <ZoomControl/>
+                        <FullScreenControl/>
+                    </ControlsContainer>
+                </SigmaContainer>
+            </Message.Body>
+        </Message>
     );
 }
