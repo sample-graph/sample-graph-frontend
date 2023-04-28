@@ -14,6 +14,7 @@ This React project provides a frontend for SampleGraph: a web application for vi
 * `axios` - HTTP requests to reach the backend API
 * `react-toastify` - elements for pop-up notifications
 * `react-spinners ` - elements for loading spinners
+* `fortawesome` - FontAwesome components (icons)
 
 ## Necessary Environemnt Variables
 
