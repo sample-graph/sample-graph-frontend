@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import MultiDirectedGraph from "graphology";
 import { SigmaContainer, useLoadGraph, ControlsContainer, ZoomControl, SearchControl, FullScreenControl } from "@react-sigma/core";
 import { useLayoutForceAtlas2 } from "@react-sigma/layout-forceatlas2";
@@ -25,7 +25,6 @@ function deSnakeCase(str) {
 }
 
 export function LoadGraph(props) {
-    const { id } = useParams();
     const loadGraph = useLoadGraph();
     const { positions, assign } = useLayoutForceAtlas2();
     const node_size = 6;
@@ -64,14 +63,14 @@ export function LoadGraph(props) {
             props.setLoading(false);
         };
         getResource(`graph/${props.id}`, response_handler, error_handler);
-    }, [id, loadGraph, positions, assign, node_size, edge_size, props]);
+    }, [loadGraph, positions, assign, node_size, edge_size, props]);
 
     return null;
 }
 
 export function DisplayGraph() {
     const [loading, setLoading] = React.useState(true);
-    const { id } = useParams();
+    const searchParams = useSearchParams()[0];
     return (
         <Message>
             <Message.Header radiusless={true}>
@@ -92,7 +91,7 @@ export function DisplayGraph() {
                         edgeLabelColor: "black",
                     }}
                 >
-                    <LoadGraph setLoading={setLoading} id={id}/>
+                    <LoadGraph setLoading={setLoading} id={searchParams.get("id")}/>
                     <ControlsContainer>
                         <SearchControl/>
                         <ZoomControl/>

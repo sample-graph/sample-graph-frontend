@@ -54,7 +54,7 @@ export default function App() {
           element={<AppHome/>}
         />
         <Route
-          path="/graph/:id"
+          path="/graph"
           element={<AppGraph/>}
         />
       </Routes>

@@ -5,7 +5,7 @@ import { Message } from "react-bulma-components";
 function Result(result) {
     return (
         <li key={result.id}>
-            <Link to={`graph/${result.id}`}>"{result.title}" by {result.artist_name}</Link>
+            <Link to={`graph?id=${result.id}`}>"{result.title}" by {result.artist_name}</Link>
         </li>
     );
 }
