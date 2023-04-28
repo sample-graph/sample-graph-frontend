@@ -75,7 +75,7 @@ export function DisplayGraph() {
     return (
         <Message>
             <Message.Header radiusless={true}>
-                <a href="/">&larr; Return Home</a>
+                <a href="/">&larr; Home</a>
             </Message.Header>
             <Message.Body style={{height: "65vh"}} paddingless={true} radiusless={true} backgroundColor="white">
                 <div style={{ height: "100%", width: "100%", display: loading ? "flex" : "none", alignContent: "center", alignItems: "center"}}>
