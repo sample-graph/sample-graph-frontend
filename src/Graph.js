@@ -14,7 +14,7 @@ import { getResource } from "./utils";
 function addNode(graph, center, node, node_size) {
     const label = `${node.song.title} by ${node.song.artist_name}`;
     var settings = {x: 0, y: 0, size: node_size, degree: node.degree, label: label};
-    if (center == node.song.id) {
+    if (Number(center) === node.song.id) {
         settings["color"] = "red";
     }
     graph.addNode(node.song.id, settings);
