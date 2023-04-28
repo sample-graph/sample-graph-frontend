@@ -19,8 +19,8 @@ export function Results(props) {
         <React.Fragment>
             <br></br>
             <Message color={color}>
-                <Message.Header>Results</Message.Header>
-                <Message.Body>{results_jsx}</Message.Body>
+                <Message.Header radiusless={true}>Results</Message.Header>
+                <Message.Body radiusless={true}>{results_jsx}</Message.Body>
             </Message>
         </React.Fragment>
     );

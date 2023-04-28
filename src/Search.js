@@ -29,6 +29,7 @@ export function Search() {
                 <Form.Field>
                     <Form.Label>Search for a song...</Form.Label>
                     <Form.Input
+                        radiusless={true}
                         placeholder={placeholder + "?"}
                         onChange={debounce((e) => getResource(`search?q=${e.target.value}`, response_handler, error_handler), 300)}
                     />
