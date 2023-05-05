@@ -5,9 +5,9 @@ export function AppHeader() {
         <header>
             <Navbar p={3}>
                 <Navbar.Brand>
-                    <Navbar.Item id="logo" href="/">
-                        <Heading>SampleGraph</Heading>
-                    </Navbar.Item>
+                    <Heading>
+                        <Navbar.Item id="logo" href="/">SampleGraph</Navbar.Item>
+                    </Heading>
                 </Navbar.Brand>
             </Navbar>
         </header>

@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import MultiDirectedGraph from "graphology";
 import { SigmaContainer, useLoadGraph, ControlsContainer, ZoomControl, SearchControl, FullScreenControl } from "@react-sigma/core";
 import { useLayoutForceAtlas2 } from "@react-sigma/layout-forceatlas2";
@@ -77,9 +77,9 @@ export function DisplayGraph() {
     return (
         <Message>
             <Message.Header radiusless={true}>
-                <a href="/">&larr; Home</a>
+                <Link to="/">&larr; Home</Link>
             </Message.Header>
-            <Message.Body style={{height: "65vh"}} paddingless={true} radiusless={true} backgroundColor="white">
+            <Message.Body style={{height: "60vh"}} paddingless={true} radiusless={true} backgroundColor="white">
                 <div style={{ height: "100%", width: "100%", display: loading ? "flex" : "none", alignContent: "center", alignItems: "center"}}>
                     <ScaleLoader radius={0} loading={loading} speedMultiplier={0.75} style={{margin: "auto"}}/>
                 </div>
