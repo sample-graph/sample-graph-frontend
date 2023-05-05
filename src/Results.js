@@ -16,12 +16,9 @@ export function Results(props) {
     const results_jsx = has_results ? <ol>{Array.from(results).map(Result)}</ol> : "Nothing ¯\\_(ツ)_/¯";
     const color = has_results ? "success" : "";
     return (
-        <React.Fragment>
-            <br></br>
-            <Message color={color}>
-                <Message.Header radiusless={true}>Results</Message.Header>
-                <Message.Body radiusless={true}>{results_jsx}</Message.Body>
-            </Message>
-        </React.Fragment>
+        <Message color={color}>
+            <Message.Header radiusless={true}>Results</Message.Header>
+            <Message.Body radiusless={true}>{results_jsx}</Message.Body>
+        </Message>
     );
 }

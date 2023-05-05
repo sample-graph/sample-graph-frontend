@@ -1,5 +1,5 @@
 import React from "react";
-import { Form } from "react-bulma-components";
+import { Block, Form } from "react-bulma-components";
 import { debounce } from "lodash";
 
 import { Results } from "./Results";
@@ -25,18 +25,24 @@ export function Search() {
 
     return (
         <React.Fragment>
-            <h2>Try it out!</h2>
-             <form onSubmit={(e) => e.preventDefault()}>
-                <Form.Field>
-                    <Form.Label>Search for a song...</Form.Label>
-                    <Form.Input
-                        radiusless={true}
-                        placeholder={placeholder + "?"}
-                        onChange={debounce((e) => getResource(`search?q=${e.target.value}`, response_handler, error_handler), 300)}
-                    />
-                </Form.Field>
-            </form>
-            <Results results={results}></Results>
+            <Block>
+                <h2>Try it out!</h2>
+            </Block>
+            <Block>
+                <form onSubmit={(e) => e.preventDefault()}>
+                    <Form.Field>
+                        <Form.Label>Search for a song...</Form.Label>
+                        <Form.Input
+                            radiusless={true}
+                            placeholder={placeholder + "?"}
+                            onChange={debounce((e) => getResource(`search?q=${e.target.value}`, response_handler, error_handler), 300)}
+                        />
+                    </Form.Field>
+                </form>
+            </Block>
+            <Block>
+                <Results results={results}></Results>
+            </Block>
         </React.Fragment>
     );
 }
