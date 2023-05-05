@@ -6,7 +6,7 @@ import { Results } from "./Results";
 import { toast } from "react-toastify";
 import { getResource } from "./utils";
 
-const random_titles = ["In My Feelings by Drake", "Truth Hurts by Lizzo", "3005 by Childish Gambino"];
+const random_titles = ["In My Feelings by Drake", "Truth Hurts by Lizzo", "V. 3005 by Childish Gambino"];
 
 function random(titles) {
     var index = Math.floor(Math.random() * titles.length);
@@ -25,6 +25,7 @@ export function Search() {
 
     return (
         <React.Fragment>
+            <h2>Try it out!</h2>
              <form onSubmit={(e) => e.preventDefault()}>
                 <Form.Field>
                     <Form.Label>Search for a song...</Form.Label>

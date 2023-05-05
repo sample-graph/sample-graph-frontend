@@ -1,6 +1,6 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { Container, Content, Section } from 'react-bulma-components';
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import { Button, Container, Content, Section } from 'react-bulma-components';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -45,6 +45,16 @@ export function AppGraph() {
   );
 }
 
+export function PageNotFound() {
+  return AppBase(
+    <React.Fragment>
+      <h2>ʕノ•ᴥ•ʔノ ︵ ┻━┻</h2>
+      <br/>
+      <Link to="/"><Button radiusless={true} color="link">Return Home</Button></Link>
+    </React.Fragment>
+  );
+}
+
 export default function App() {
   return (
     <Router>
@@ -56,6 +66,10 @@ export default function App() {
         <Route
           path="/graph/:id"
           element={<AppGraph/>}
+        />
+        <Route
+          path="*"
+          element={<PageNotFound/>}
         />
       </Routes>
     </Router>
