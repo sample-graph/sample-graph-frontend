@@ -34,7 +34,6 @@ export function AppAbout() {
                 <p>
                     Boredom/curiosity. This app is mostly inspired by discussions with my college roommates about the "sphere of influence" that highly sampled songs have on the rap and R&B music that we enjoy.
                     However, unlike something like WhoSampled's <a href="https://www.whosampled.com/six-degrees">Six Degrees of Music Separation</a>, this app is mostly exploratory and focuses on individual songs rather than artists.
-                    Finally, this project is a technical exploration of two fields of development/programming languages: one that peaked my curiosity (Rust and REST APIs) and one that I know is inevitable in my career (React and front-end development).
                 </p>
             </Block>
         </React.Fragment>
